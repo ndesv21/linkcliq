@@ -15,6 +15,7 @@ services:
       CONTACT_EMAIL: ${CONTACT_EMAIL:-}
       TRUSTED_ORIGINS: ${TRUSTED_ORIGINS:-}
       PUBLIC_URL: ${PUBLIC_URL:-}
+      IP_ADDRESS_HEADERS: ${IP_ADDRESS_HEADERS:-}
     volumes:
       - linkcliq-data:/app/data
 

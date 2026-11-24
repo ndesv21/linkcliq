@@ -191,6 +191,7 @@ Database migrations run automatically when the new version starts. Read the rele
 | `CONTACT_EMAIL` | | Shows a Report link on public pages. |
 | `TRUSTED_ORIGINS` | | Extra origins allowed to call the auth API, comma separated. |
 | `PUBLIC_URL` | from the request | Address used for page links when your proxy does not forward `Host`. |
+| `IP_ADDRESS_HEADERS` | `x-forwarded-for` (`x-real-ip` on Railway) | Headers that carry the visitor's IP for sign-in rate limiting, comma separated. List only headers your proxy overwrites. Behind Cloudflare, use `cf-connecting-ip`. |
 | `SKIP_MIGRATIONS` | `false` | Skip automatic migrations if you run `npm run db:migrate` yourself. |
 | `PORT` | `3000` | Port the server listens on. |
 

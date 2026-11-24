@@ -7,7 +7,9 @@ import { redirect } from "next/navigation"
 import { cache } from "react"
 import { db, schema } from "@/lib/db"
 import { resetPasswordEmail, sendEmail } from "@/lib/email"
-import { authSecret, emailEnabled } from "@/lib/env"
+import { authSecret, emailEnabled, ipAddressHeaders } from "@/lib/env"
+
+const ipHeaders = ipAddressHeaders()
 
 export const auth = betterAuth({
   appName: "LinkCliq",
@@ -39,6 +41,7 @@ export const auth = betterAuth({
     cookieCache: { enabled: true, maxAge: 60 * 5 },
   },
   user: { deleteUser: { enabled: true } },
+  advanced: ipHeaders ? { ipAddress: { ipAddressHeaders: ipHeaders } } : undefined,
   telemetry: { enabled: false },
   logger: { level: process.env.NEXT_PHASE === "phase-production-build" ? "error" : "warn" },
   plugins: [nextCookies()],

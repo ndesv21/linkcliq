@@ -47,3 +47,15 @@ export function isAdminEmail(email: string | null | undefined) {
   const admins = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean)
   return admins.includes(email.toLowerCase())
 }
+
+/**
+ * Headers the auth rate limiter trusts for the visitor's IP. Only list headers your proxy
+ * overwrites, or visitors can fake them. Railway's edge replaces X-Real-IP, so it is the
+ * default there; elsewhere Better Auth's own default (X-Forwarded-For) applies.
+ */
+export function ipAddressHeaders() {
+  const custom = process.env.IP_ADDRESS_HEADERS?.split(",").map((h) => h.trim().toLowerCase()).filter(Boolean)
+  if (custom?.length) return custom
+  if (process.env.RAILWAY_ENVIRONMENT_ID) return ["x-real-ip"]
+  return undefined
+}

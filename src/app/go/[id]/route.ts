@@ -2,6 +2,7 @@ import { after, NextResponse, type NextRequest } from "next/server"
 import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { links, pages } from "@/lib/db/schema"
+import { getPublicOrigin } from "@/lib/dashboard"
 import { buildDestination } from "@/lib/destination"
 import { COUNTED_PARAM, ESCAPE_FROM_PARAM, ESCAPE_METHOD_PARAM, ESCAPE_PARAM } from "@/lib/escape"
 import { resolveEscape } from "@/lib/escape-server"
@@ -21,18 +22,20 @@ function redirect(to: string | URL) {
 
 export async function GET(req: NextRequest, ctx: RouteContext<"/go/[id]">) {
   const { id } = await ctx.params
+  // req.url is the server's bind address (0.0.0.0:8080 in a container), never the public host.
+  const origin = await getPublicOrigin()
   const [row] = await db
     .select({ link: links, page: pages })
     .from(links)
     .innerJoin(pages, eq(pages.id, links.pageId))
     .where(eq(links.id, id))
-  if (!row || !isPagePublic(row.page)) return redirect(new URL("/", req.url))
+  if (!row || !isPagePublic(row.page)) return redirect(new URL("/", origin))
 
   const { link, page } = row
-  if (!link.url || !isLinkLive(link)) return redirect(new URL(`/${page.handle}`, req.url))
+  if (!link.url || !isLinkLive(link)) return redirect(new URL(`/${page.handle}`, origin))
 
   const params = req.nextUrl.searchParams
-  const selfHost = req.nextUrl.host
+  const selfHost = new URL(origin).host
   const explicit = params.get("s") ?? params.get("src")
   const utm = { source: params.get("utm_source"), medium: params.get("utm_medium"), campaign: params.get("utm_campaign") }
   const info = clientInfo(req.headers)
@@ -69,12 +72,12 @@ export async function GET(req: NextRequest, ctx: RouteContext<"/go/[id]">) {
       inApp: info.inApp,
       ua: info.ua,
       params,
-      base: new URL(`/go/${link.id}`, req.url),
+      base: new URL(`/go/${link.id}`, origin),
       source,
     })
     if (escape?.plan.auto?.kind === "redirect") return redirect(escape.plan.auto.href)
     if (escape) {
-      const screen = new URL(`/o/${link.id}`, req.url)
+      const screen = new URL(`/o/${link.id}`, origin)
       for (const [k, v] of params) screen.searchParams.set(k, v)
       return redirect(screen)
     }
