@@ -1,0 +1,22 @@
+services:
+  linkcliq:
+    image: ghcr.io/ndesv21/linkcliq:latest
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
+      DISABLE_SIGNUP: ${DISABLE_SIGNUP:-false}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+      TRUSTED_ORIGINS: ${TRUSTED_ORIGINS:-}
+      PUBLIC_URL: ${PUBLIC_URL:-}
+    volumes:
+      - linkcliq-data:/app/data
+
+volumes:
+  linkcliq-data:
