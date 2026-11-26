@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import {
   ActivityIcon,
@@ -40,6 +41,17 @@ import { Separator } from "@/components/ui/separator"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { getSession } from "@/lib/auth"
 import { GITHUB_URL, isCloud, socialclawHref } from "@/lib/env"
+
+const SHARE_TITLE = "LinkCliq: the link in bio that gets buyers out of TikTok's browser"
+const SHARE_DESCRIPTION =
+  "A free, open source link in bio page with click analytics. It moves TikTok, Instagram and Facebook visitors to Safari or Chrome, where they are signed in and their card fills itself."
+const SHARE_IMAGE = { url: "/og.png", width: 1280, height: 640, alt: "The same TikTok bio tap with and without LinkCliq: checkout abandoned versus payment complete" }
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", url: "/", siteName: "LinkCliq", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [SHARE_IMAGE] },
+  twitter: { card: "summary_large_image", title: SHARE_TITLE, description: SHARE_DESCRIPTION, images: [SHARE_IMAGE] },
+}
 
 const FEATURES = [
   { icon: ShieldCheckIcon, title: "In-app browser escape", text: "Sends TikTok, Instagram and Facebook visitors to Safari or Chrome, where they are logged in and their cards autofill." },
