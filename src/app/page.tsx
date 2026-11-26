@@ -4,27 +4,35 @@ import {
   ArrowRightIcon,
   BarChart3Icon,
   CalendarClockIcon,
+  CalendarDaysIcon,
   CheckIcon,
+  CookieIcon,
   CreditCardIcon,
   DatabaseIcon,
   DownloadIcon,
   EyeOffIcon,
+  GraduationCapIcon,
   KeyRoundIcon,
   LayersIcon,
+  LayoutListIcon,
   LogInIcon,
+  MapPinIcon,
+  MicIcon,
   MinusIcon,
+  Music2Icon,
   PaletteIcon,
   QrCodeIcon,
   ScanEyeIcon,
-  SendIcon,
   ShieldCheckIcon,
+  ShoppingBagIcon,
+  SparklesIcon,
   TagIcon,
   WalletIcon,
 } from "lucide-react"
+import { EscapeStory } from "@/components/marketing/escape-story"
 import { HeroPhones } from "@/components/marketing/hero-phones"
+import { ProductTour } from "@/components/marketing/product-tour"
 import { PlatformIcon } from "@/components/platform-icon"
-import { SOCIALCLAW_NETWORKS } from "@/components/socialclaw/provider"
-import { SocialClawMark } from "@/components/socialclaw/socialclaw-mark"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -40,10 +48,22 @@ const FEATURES = [
   { icon: ScanEyeIcon, title: "Platform attribution", text: "Knows a visit came from TikTok even when TikTok hides the referrer, from its in-app browser signature." },
   { icon: TagIcon, title: "UTM passthrough", text: "Outbound links carry utm_source=tiktok or instagram, so your store sees where buyers came from." },
   { icon: CalendarClockIcon, title: "Scheduled links", text: "Links that appear and disappear on time. Built for drops, launches and sales that end." },
+  { icon: SparklesIcon, title: "Highlighted links", text: "Make the link that matters pulse, wobble or glow so it gets the tap." },
+  { icon: LayoutListIcon, title: "Headers and social icons", text: "Group links under headers and add icons for Instagram, TikTok, YouTube and the rest of your profiles." },
   { icon: PaletteIcon, title: "Themes that look designed", text: "Presets, gradients, seven fonts, four button styles and a live phone preview while you edit." },
   { icon: QrCodeIcon, title: "QR codes", text: "PNG and SVG in your colors, with scans tracked as their own source." },
+  { icon: CalendarDaysIcon, title: "Social Calendar", text: "Connect SocialClaw to see your scheduled and published posts next to your links, and schedule a post about any link." },
+  { icon: CookieIcon, title: "No cookie banner", text: "Visitors are counted with a hash that rotates daily. Nothing is stored on their device and raw IPs are never saved." },
   { icon: DownloadIcon, title: "Your data, exportable", text: "Every event as CSV. GA4 and Meta Pixel if you want them too." },
-  { icon: SendIcon, title: "Post to 11 networks", text: "Announce a link on X, Instagram, TikTok, LinkedIn and more with the built-in SocialClaw composer." },
+]
+
+const USE_CASES = [
+  { icon: SparklesIcon, title: "Creators", text: "Latest video, brand deals and discount codes, merch and a newsletter, all one tap from your profile." },
+  { icon: ShoppingBagIcon, title: "Online shops", text: "Best sellers, new drops and the sale that ends on Sunday, straight from the post that sold it." },
+  { icon: GraduationCapIcon, title: "Coaches and courses", text: "A sales page, a free guide that grows your list and a calendar for discovery calls." },
+  { icon: Music2Icon, title: "Musicians", text: "The new single on every streaming service, tour dates and the ticket link while it lasts." },
+  { icon: MicIcon, title: "Podcasters", text: "Every listening app, the latest episode and the sponsor offer you promised on air." },
+  { icon: MapPinIcon, title: "Local businesses", text: "Menu, bookings, directions and reviews for the people who found you on Instagram." },
 ]
 
 const PAINS = [
@@ -83,8 +103,8 @@ const FAQ = [
     a: "Not for LinkCliq analytics. Visitors are counted with a hash of the IP and browser that rotates daily, nothing is stored on the device, and raw IPs are never saved. If you add GA4 or Meta Pixel, their rules apply.",
   },
   {
-    q: "What is SocialClaw and do I need it?",
-    a: "SocialClaw is a social media scheduler with an API. It is optional. If you paste a SocialClaw API key, every link gets a post button that publishes or schedules to X, Instagram, TikTok, LinkedIn and seven more networks.",
+    q: "What is the Social Calendar?",
+    a: "A month view of the posts you have scheduled and published through SocialClaw, a social media scheduler with an API. It is optional. Add a SocialClaw API key in the calendar settings and your real posts show up next to your links, and every link gets a button to schedule a post about it on X, Instagram, TikTok, LinkedIn and seven more networks.",
   },
 ]
 
@@ -108,8 +128,10 @@ export default async function Home() {
             </span>
             LinkCliq
           </Link>
-          <nav className="hidden items-center gap-5 text-sm text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-5 text-sm text-muted-foreground lg:flex">
+            <a href="#link-in-bio" className="hover:text-foreground">Link in bio</a>
             <a href="#escape" className="hover:text-foreground">Browser escape</a>
+            <a href="#tour" className="hover:text-foreground">Tour</a>
             <a href="#features" className="hover:text-foreground">Features</a>
             <a href="#compare" className="hover:text-foreground">Compare</a>
             <a href="#self-host" className="hover:text-foreground">Self-host</a>
@@ -164,16 +186,73 @@ export default async function Home() {
           </div>
         </section>
 
+        <section id="link-in-bio" className="border-b">
+          <div className="mx-auto max-w-6xl px-4 py-20">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-end">
+              <div>
+                <Badge variant="secondary">Link in bio, explained</Badge>
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance">One link on your profile. Everything you sell behind it.</h2>
+              </div>
+              <div className="grid gap-4 text-muted-foreground">
+                <p>
+                  Social apps keep links out of posts. A link in an Instagram caption is plain text nobody can tap, and your profile only has room for a few links at most. So every post ends with the same line: link in bio.
+                </p>
+                <p>
+                  A link in bio page turns that one profile link into a menu of everything you want people to find: your shop, your newest video, a newsletter, a booking page and your other socials. It is one of the most used tools on social media:{" "}
+                  <a href="https://linktr.ee/about" target="_blank" rel="noreferrer" className="text-foreground underline underline-offset-4">
+                    Linktree alone says it has more than 70 million users
+                  </a>
+                  .
+                </p>
+              </div>
+            </div>
+            <ol className="mt-12 grid gap-4 md:grid-cols-3">
+              {[
+                { title: "Put one link in your bio", text: "linkcliq.com/yourname goes in the website field of TikTok, Instagram, YouTube, X and the rest." },
+                { title: "Point every post at it", text: "A video, a story or a caption says link in bio, and followers know where to tap." },
+                { title: "They choose where to go", text: "Your page lists the shop, the course and the latest drop, and shows you which link they picked." },
+              ].map((s, i) => (
+                <li key={s.title} className="flex gap-4 rounded-xl border bg-card p-5">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">{i + 1}</span>
+                  <div>
+                    <h3 className="font-semibold">{s.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <h3 className="mt-16 text-lg font-semibold">Who uses one</h3>
+            <div className="mt-5 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {USE_CASES.map((u) => (
+                <div key={u.title} className="flex gap-3">
+                  <u.icon className="mt-0.5 size-5 shrink-0 text-chart-2" />
+                  <div>
+                    <h4 className="font-medium">{u.title}</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{u.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="escape" className="border-b bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 py-20">
             <div className="max-w-2xl">
               <Badge variant="secondary">The problem nobody fixes</Badge>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance">Your bio link opens in a browser your customers have never used</h2>
               <p className="mt-4 text-muted-foreground">
-                TikTok, Instagram and Facebook open links inside their own webview. It looks like a normal page, but it is a separate browser with none of the visitor&apos;s logins, passwords or payment details. Your funnel breaks at the exact moment someone wants to buy.
+                TikTok, Instagram and Facebook open links inside their own webview. It looks like a normal page, but it is a separate browser with none of the visitor&apos;s logins, passwords or payment details. Your funnel breaks at the exact moment someone wants to buy. Here is the same tap on an iPhone, with and without LinkCliq.
               </p>
             </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12">
+              <EscapeStory />
+            </div>
+            <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-muted-foreground">
+              TikTok on iPhone has no verified automatic route, so LinkCliq asks for that one tap and points at TikTok&apos;s own menu as a backup. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically.
+            </p>
+            <h3 className="mt-20 text-lg font-semibold">What the in-app browser takes away</h3>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {PAINS.map((p) => (
                 <Card key={p.title} size="sm">
                   <CardHeader>
@@ -205,7 +284,17 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="features" className="border-b">
+        <section id="tour" className="border-b">
+          <div className="mx-auto max-w-6xl px-4 py-20">
+            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance">A look inside the dashboard</h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">These are real screens from LinkCliq, the same app you can run yourself or use at linkcliq.com.</p>
+            <div className="mt-8">
+              <ProductTour />
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="border-b bg-muted/30">
           <div className="mx-auto max-w-6xl px-4 py-20">
             <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-balance">Everything the paid tools charge for, in the open</h2>
             <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -220,7 +309,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="compare" className="border-b bg-muted/30">
+        <section id="compare" className="border-b">
           <div className="mx-auto max-w-6xl px-4 py-20">
             <h2 className="text-3xl font-semibold tracking-tight">How it compares</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
@@ -252,7 +341,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="self-host" className="border-b">
+        <section id="self-host" className="border-b bg-muted/30">
           <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 lg:grid-cols-2">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">Running in two minutes</h2>
@@ -293,28 +382,6 @@ export default async function Home() {
                 </pre>
               </CardContent>
             </Card>
-          </div>
-        </section>
-
-        <section className="border-b bg-muted/30">
-          <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 md:flex-row md:items-center">
-            <SocialClawMark className="size-12 shrink-0 text-foreground [--sc-ink:var(--background)]" />
-            <div className="flex-1">
-              <h2 className="text-2xl font-semibold tracking-tight">Post your links everywhere with SocialClaw</h2>
-              <p className="mt-2 max-w-2xl text-muted-foreground">
-                Connect a SocialClaw API key and every link gets a post button. Publish or schedule to X, Instagram, TikTok, LinkedIn, YouTube, Facebook, Threads, Pinterest, Reddit, Discord and Telegram.
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-muted-foreground">
-                {SOCIALCLAW_NETWORKS.map((p) => (
-                  <PlatformIcon key={p} platform={p} className="size-4" />
-                ))}
-              </div>
-            </div>
-            <Button variant="outline" asChild>
-              <a href={socialclawHref("landing")} target="_blank" rel="noreferrer">
-                Visit SocialClaw <ArrowRightIcon />
-              </a>
-            </Button>
           </div>
         </section>
 

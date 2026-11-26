@@ -90,6 +90,107 @@ export async function schedulePosts(key: string, input: SchedulePostInput) {
   })
 }
 
+export type SocialClawPostStatus =
+  | "draft"
+  | "scheduled"
+  | "publishing"
+  | "published"
+  | "action_required"
+  | "retry_pending"
+  | "failed"
+  | "canceled"
+
+type RawAsset = string | { url?: string | null; publicUrl?: string | null; previewUrl?: string | null; thumbnailUrl?: string | null; posterUrl?: string | null; mime?: string | null; kind?: string | null }
+
+type RawPost = {
+  id: string
+  provider?: string | null
+  account?: string | null
+  name?: string | null
+  description?: string | null
+  status?: string | null
+  publishAtUtc?: string | null
+  nextAttemptAt?: string | null
+  publishedAt?: string | null
+  providerUrl?: string | null
+  lastError?: string | null
+  mediaLink?: string | null
+  assets?: RawAsset[] | null
+  campaignName?: string | null
+}
+
+export type SocialClawPost = {
+  id: string
+  provider: string
+  account: string
+  title: string | null
+  text: string
+  status: SocialClawPostStatus
+  /** When it went out, or when it is due. ISO 8601. */
+  at: string
+  url: string | null
+  error: string | null
+  thumbnail: string | null
+  campaign: string | null
+}
+
+const IMAGE_URL = /\.(png|jpe?g|webp|gif|avif)(\?|$)/i
+
+function thumbnailOf(post: RawPost) {
+  for (const asset of post.assets ?? []) {
+    if (typeof asset === "string") {
+      if (IMAGE_URL.test(asset)) return asset
+      continue
+    }
+    const url = asset.thumbnailUrl || asset.posterUrl || asset.previewUrl || (asset.mime?.startsWith("image/") || asset.kind === "image" ? asset.publicUrl || asset.url : null)
+    if (url) return url
+  }
+  return post.mediaLink && IMAGE_URL.test(post.mediaLink) ? post.mediaLink : null
+}
+
+function toPost(raw: RawPost): SocialClawPost | null {
+  const at = raw.publishedAt || raw.publishAtUtc || raw.nextAttemptAt
+  if (!at) return null
+  const text = (raw.description || raw.name || "").trim()
+  const name = raw.name?.trim().replace(/(…|\.\.\.)$/, "") ?? ""
+  return {
+    id: raw.id,
+    provider: raw.provider || "unknown",
+    account: raw.account || "",
+    // SocialClaw fills name with the start of the text when no title was given.
+    title: name && !text.startsWith(name) ? raw.name!.trim() : null,
+    text,
+    status: (raw.status as SocialClawPostStatus) || "scheduled",
+    at,
+    url: raw.providerUrl || null,
+    error: raw.lastError || null,
+    thumbnail: thumbnailOf(raw),
+    campaign: raw.campaignName || null,
+  }
+}
+
+/** Posts due or published between two instants, oldest first, up to 1,000. Canceled posts are left out. */
+export async function listPosts(key: string, range: { from: Date; to: Date }) {
+  const pageSize = 200
+  const posts: SocialClawPost[] = []
+  for (let offset = 0; offset < 1000; offset += pageSize) {
+    const params = new URLSearchParams({
+      from: range.from.toISOString(),
+      to: range.to.toISOString(),
+      limit: String(pageSize),
+      offset: String(offset),
+    })
+    const body = await call<{ posts?: RawPost[]; total?: number }>(key, `/v1/posts?${params}`)
+    const batch = body.posts ?? []
+    for (const raw of batch) {
+      const post = toPost(raw)
+      if (post && post.status !== "canceled") posts.push(post)
+    }
+    if (batch.length < pageSize || (typeof body.total === "number" && offset + pageSize >= body.total)) break
+  }
+  return posts.sort((a, b) => Date.parse(a.at) - Date.parse(b.at))
+}
+
 export async function getStoredKey(userId: string) {
   const [row] = await db.select().from(integrations).where(eq(integrations.userId, userId))
   if (!row?.socialclawKey) return null

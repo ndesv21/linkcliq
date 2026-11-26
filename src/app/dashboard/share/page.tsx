@@ -1,16 +1,15 @@
+import Link from "next/link"
 import { ExternalLinkIcon, SendIcon } from "lucide-react"
 import { CopyButton } from "@/components/dashboard/copy-button"
 import { SiteHeader } from "@/components/dashboard/site-header"
 import { PlatformIcon } from "@/components/platform-icon"
 import { QrCard } from "@/components/share/qr-card"
 import { ComposerDialog } from "@/components/socialclaw/composer-dialog"
-import { SocialClawMark } from "@/components/socialclaw/socialclaw-mark"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { getPublicOrigin } from "@/lib/dashboard"
-import { socialclawHref } from "@/lib/env"
 import { requirePage } from "@/lib/pages"
 
 export const metadata = { title: "Share & QR" }
@@ -61,7 +60,7 @@ export default async function SharePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <SocialClawMark className="size-5 text-foreground [--sc-ink:var(--background)]" />
+                <SendIcon className="size-4 text-muted-foreground" />
                 Announce it everywhere
               </CardTitle>
               <CardDescription>
@@ -83,9 +82,7 @@ export default async function SharePage() {
                 </Button>
               </ComposerDialog>
               <Button variant="ghost" asChild>
-                <a href={socialclawHref("share_page")} target="_blank" rel="noreferrer">
-                  About SocialClaw
-                </a>
+                <Link href="/dashboard/calendar">Open Social Calendar</Link>
               </Button>
             </CardFooter>
           </Card>

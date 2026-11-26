@@ -33,6 +33,12 @@ Tap a link in TikTok or Instagram and it opens in the app's built-in browser. Th
 
 If you sell anything from a bio link, this is the leakiest step of your funnel. Escape tools charge $9 to $36 a month to fix it. LinkCliq does it for free, in the open, on your own domain.
 
+<p align="center">
+  <img alt="The same tap on a TikTok bio link on iPhone, without LinkCliq (checkout inside TikTok's browser, abandoned) and with LinkCliq (one tap to Safari, paid with Apple Pay)" src="docs/escape-demo.gif" width="720" />
+</p>
+
+TikTok on iPhone needs that one tap. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically. [How it works](#how-browser-escape-works).
+
 ## Features
 
 ### Browser escape
@@ -70,9 +76,9 @@ If you sell anything from a bio link, this is the leakiest step of your funnel. 
 - Password reset emails through [Resend](https://resend.com), and accounts that can delete themselves and everything they own.
 - Country analytics without a CDN, using the bundled DB-IP Lite database.
 
-### Post to social (optional)
+### Social Calendar (optional)
 
-Paste a [SocialClaw](https://getsocialclaw.com/?utm_source=linkcliq&utm_medium=oss&utm_campaign=readme) API key to schedule posts with your links to X, Instagram, TikTok, LinkedIn and 7 more networks from the dashboard. LinkCliq works fully without it.
+Add a [SocialClaw](https://getsocialclaw.com/?utm_source=linkcliq&utm_medium=oss&utm_campaign=readme) API key in the calendar settings and the Social Calendar tab shows the posts you have scheduled and published, next to your links. Every link also gets a button to schedule a post about it on X, Instagram, TikTok, LinkedIn and 7 more networks. LinkCliq works fully without it.
 
 <table>
   <tr>
@@ -87,6 +93,11 @@ Paste a [SocialClaw](https://getsocialclaw.com/?utm_source=linkcliq&utm_medium=o
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/escape-dark.png" />
         <img alt="Browser escape settings" src="docs/screenshots/escape-light.png" />
+      </picture>
+      <br /><br />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/calendar-dark.png" />
+        <img alt="Social Calendar with scheduled and published posts" src="docs/screenshots/calendar-light.png" />
       </picture>
     </td>
   </tr>

@@ -148,7 +148,7 @@ export function ComposerDialog({ defaultText, children }: { defaultText: string;
             </EmptyHeader>
             <EmptyContent className="flex-row justify-center">
               <Button asChild>
-                <Link href="/dashboard/integrations" onClick={() => setOpen(false)}>
+                <Link href="/dashboard/calendar?settings=1" onClick={() => setOpen(false)}>
                   Add API key
                 </Link>
               </Button>

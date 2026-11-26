@@ -11,7 +11,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { connectSocialClaw, disconnectSocialClaw } from "@/lib/actions/socialclaw"
 import { socialclawHref } from "@/lib/env"
 
-export function ConnectForm() {
+export function ConnectForm({ onConnected }: { onConnected?: () => void } = {}) {
   const router = useRouter()
   const [key, setKey] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -29,6 +29,7 @@ export function ConnectForm() {
           }
           toast.success(res.data.workspace ? `Connected to ${res.data.workspace}` : "SocialClaw connected")
           setKey("")
+          onConnected?.()
           router.refresh()
         })
       }}

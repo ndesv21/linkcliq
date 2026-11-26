@@ -154,6 +154,28 @@
 .lc-hl-wobble { animation: lc-wobble 3s ease-in-out infinite; }
 .lc-hl-glow { animation: lc-glow 2s ease-in-out infinite; }
 .lc-nudge { animation: lc-nudge 1.2s ease-in-out infinite; }
+@keyframes lc-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes lc-tap {
+  0% { opacity: 0; scale: 0.4; }
+  25% { opacity: 1; scale: 1; }
+  50% { opacity: 1; scale: 0.8; }
+  100% { opacity: 0; scale: 1.7; }
+}
+@keyframes lc-type {
+  from { max-width: 0; }
+  to { max-width: 12ch; }
+}
+@keyframes lc-caret {
+  50% { opacity: 0; }
+}
+.lc-progress { animation: lc-progress 3s linear both; }
+.lc-tap { animation: lc-tap 1.1s ease-out both; }
+.lc-type { animation: lc-type 2.2s steps(12, end) both; }
+.lc-caret { animation: lc-caret 1s step-end infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .lc-hl-pulse, .lc-hl-wobble, .lc-hl-glow, .lc-nudge { animation: none; }
+  .lc-hl-pulse, .lc-hl-wobble, .lc-hl-glow, .lc-nudge, .lc-caret, .lc-tap { animation: none; }
+  .lc-type { animation: none; max-width: 12ch; }
 }

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   BarChart3Icon,
+  CalendarDaysIcon,
   ExternalLinkIcon,
   LayoutDashboardIcon,
   Link2Icon,
@@ -32,6 +33,7 @@ const MAIN = [
 const GROWTH = [
   { title: "Browser escape", href: "/dashboard/escape", icon: ShieldCheckIcon },
   { title: "Share & QR", href: "/dashboard/share", icon: ShareIcon },
+  { title: "Social Calendar", href: "/dashboard/calendar", icon: CalendarDaysIcon },
   { title: "Settings", href: "/dashboard/settings", icon: Settings2Icon },
 ]
 
