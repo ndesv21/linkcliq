@@ -17,10 +17,11 @@ A free link in bio page with real click analytics and a browser escape that move
 
 </div>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/overview-dark.png" />
-  <img alt="LinkCliq dashboard: views, clicks and visitors escaped from in-app browsers" src="docs/screenshots/overview-light.png" />
-</picture>
+<p align="center">
+  <img alt="The same tap on a TikTok bio link on iPhone, without LinkCliq (checkout inside TikTok's browser, abandoned) and with LinkCliq (one tap to Safari, paid with Apple Pay)" src="docs/escape-demo.gif" width="720" />
+</p>
+
+TikTok on iPhone needs that one tap. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically. [How it works](#how-browser-escape-works).
 
 ## Why this exists
 
@@ -33,13 +34,12 @@ Tap a link in TikTok or Instagram and it opens in the app's built-in browser. Th
 
 If you sell anything from a bio link, this is the leakiest step of your funnel. Escape tools charge $9 to $36 a month to fix it. LinkCliq does it for free, in the open, on your own domain.
 
-<p align="center">
-  <img alt="The same tap on a TikTok bio link on iPhone, without LinkCliq (checkout inside TikTok's browser, abandoned) and with LinkCliq (one tap to Safari, paid with Apple Pay)" src="docs/escape-demo.gif" width="720" />
-</p>
-
-TikTok on iPhone needs that one tap. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically. [How it works](#how-browser-escape-works).
-
 ## Features
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/overview-dark.png" />
+  <img alt="LinkCliq dashboard: views, clicks and visitors escaped from in-app browsers" src="docs/screenshots/overview-light.png" />
+</picture>
 
 ### Browser escape
 

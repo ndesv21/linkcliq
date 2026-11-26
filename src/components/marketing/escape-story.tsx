@@ -65,7 +65,7 @@ function subscribeReducedMotion(onChange: () => void) {
   return () => query.removeEventListener("change", onChange)
 }
 
-export function EscapeStory() {
+export function EscapeStory({ compact = false }: { compact?: boolean }) {
   const [step, setStep] = useState(0)
   const [run, setRun] = useState(0)
   const [choice, setChoice] = useState<boolean | null>(null)
@@ -140,7 +140,12 @@ export function EscapeStory() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 justify-items-center gap-4 [--s:0.54] min-[400px]:[--s:0.6] sm:gap-8 sm:[--s:0.8] lg:[--s:1]">
+      <div
+        className={cn(
+          "grid grid-cols-2 justify-items-center gap-4 [--s:0.54] min-[400px]:[--s:0.6] sm:gap-8 sm:[--s:0.8]",
+          compact ? "lg:[--s:0.78] xl:[--s:0.88]" : "lg:[--s:1]"
+        )}
+      >
         {(["without", "with"] as const).map((side) => (
           <figure key={side} className="flex flex-col items-center gap-4">
             <span

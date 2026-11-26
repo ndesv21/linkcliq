@@ -30,7 +30,6 @@ import {
   WalletIcon,
 } from "lucide-react"
 import { EscapeStory } from "@/components/marketing/escape-story"
-import { HeroPhones } from "@/components/marketing/hero-phones"
 import { ProductTour } from "@/components/marketing/product-tour"
 import { PlatformIcon } from "@/components/platform-icon"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -157,12 +156,12 @@ export default async function Home() {
       <main>
         <section className="relative overflow-hidden border-b">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,color-mix(in_oklab,var(--chart-2)_14%,transparent),transparent_45%),radial-gradient(circle_at_20%_80%,color-mix(in_oklab,var(--chart-1)_12%,transparent),transparent_40%)]" />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr]">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-12 md:py-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
             <div className="flex flex-col items-start gap-6">
               <Badge variant="outline" className="gap-1.5 rounded-full px-3 py-1">
                 <span className="size-1.5 rounded-full bg-chart-3" /> Open source · MIT · self-hosted
               </Badge>
-              <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
                 The link in bio that gets buyers out of TikTok&apos;s browser
               </h1>
               <p className="max-w-xl text-lg text-pretty text-muted-foreground">
@@ -182,7 +181,12 @@ export default async function Home() {
               </div>
               <p className="text-sm text-muted-foreground">No paid tier. No tracking cookies. Your database.</p>
             </div>
-            <HeroPhones />
+            <div className="flex flex-col gap-5">
+              <EscapeStory compact />
+              <p className="mx-auto max-w-xl text-center text-xs text-pretty text-muted-foreground">
+                TikTok on iPhone has no verified automatic route, so LinkCliq asks for that one tap and points at TikTok&apos;s own menu as a backup. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -242,16 +246,10 @@ export default async function Home() {
               <Badge variant="secondary">The problem nobody fixes</Badge>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance">Your bio link opens in a browser your customers have never used</h2>
               <p className="mt-4 text-muted-foreground">
-                TikTok, Instagram and Facebook open links inside their own webview. It looks like a normal page, but it is a separate browser with none of the visitor&apos;s logins, passwords or payment details. Your funnel breaks at the exact moment someone wants to buy. Here is the same tap on an iPhone, with and without LinkCliq.
+                TikTok, Instagram and Facebook open links inside their own webview. It looks like a normal page, but it is a separate browser with none of the visitor&apos;s logins, passwords or payment details. Your funnel breaks at the exact moment someone wants to buy.
               </p>
             </div>
-            <div className="mt-12">
-              <EscapeStory />
-            </div>
-            <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-muted-foreground">
-              TikTok on iPhone has no verified automatic route, so LinkCliq asks for that one tap and points at TikTok&apos;s own menu as a backup. Instagram and Threads on iPhone, and most Meta apps on Android, open Safari or Chrome automatically.
-            </p>
-            <h3 className="mt-20 text-lg font-semibold">What the in-app browser takes away</h3>
+            <h3 className="mt-12 text-lg font-semibold">What the in-app browser takes away</h3>
             <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {PAINS.map((p) => (
                 <Card key={p.title} size="sm">
